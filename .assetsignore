@@ -1,0 +1,9 @@
+.git
+.wrangler
+backup
+AGENTS.md
+.nvmrc
+.gitignore
+wrangler.jsonc
+.assetsignore
+.DS_Store
