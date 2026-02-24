@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vijay Kas — Engineering Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a192f;
+      --bg-card: rgba(17, 34, 64, 0.6);
+      --bg-card-hover: rgba(23, 42, 75, 0.8);
+      --text-bright: #e6f1ff;
+      --text-heading: #ccd6f6;
+      --text-body: #8892b0;
+      --text-muted: #5a6580;
+      --accent: #64ffda;
+      --accent-dim: rgba(100, 255, 218, 0.1);
+      --accent-mid: rgba(100, 255, 218, 0.15);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--text-muted) var(--bg-primary);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-body);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--accent-mid);
+      color: var(--accent);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--text-muted);
+      border-radius: 4px;
+    }
+
+    /* ===== CURSOR SPOTLIGHT ===== */
+    .spotlight {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 0.3s;
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      min-height: 100vh;
+      padding: 0 24px;
+    }
+
+    /* ===== LEFT SIDEBAR ===== */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      width: 42%;
+      max-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 96px 48px 96px 0;
+      flex-shrink: 0;
+    }
+
+    .sidebar-top {}
+
+    .sidebar h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-bright);
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-heading);
+      margin-top: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .sidebar .tagline {
+      font-size: 15px;
+      color: var(--text-body);
+      margin-top: 16px;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 0;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav a .nav-line {
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--text-muted);
+      transition: width var(--transition), background var(--transition);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--text-bright);
+    }
+
+    .nav a:hover .nav-line,
+    .nav a.active .nav-line {
+      width: 64px;
+      background: var(--text-bright);
+    }
+
+    .nav a.active {
+      color: var(--accent);
+    }
+
+    .nav a.active .nav-line {
+      background: var(--accent);
+    }
+
+    /* ===== SOCIAL ICONS ===== */
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      transition: color var(--transition), transform var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .social-links a svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      flex: 1;
+      padding: 96px 0 96px 48px;
+    }
+
+    section {
+      margin-bottom: 120px;
+      scroll-margin-top: 80px;
+    }
+
+    section:last-child {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      display: none;
+    }
+
+    /* ===== ABOUT ===== */
+    .about-text p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .about-text a {
+      color: var(--text-bright);
+      text-decoration: none;
+      position: relative;
+      transition: color var(--transition);
+    }
+
+    .about-text a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+      transition: opacity var(--transition);
+    }
+
+    .about-text a:hover {
+      color: var(--accent);
+    }
+
+    .about-text a:hover::after {
+      opacity: 1;
+    }
+
+    /* ===== CARDS (shared) ===== */
+    .card {
+      display: block;
+      padding: 24px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      margin-bottom: 16px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    .card:hover {
+      background: var(--bg-card);
+      border-color: rgba(100, 255, 218, 0.08);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .card:hover .card-title {
+      color: var(--accent);
+    }
+
+    .card:hover .card-arrow {
+      transform: translate(4px, -4px);
+      color: var(--accent);
+    }
+
+    .card-overline {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-heading);
+      transition: color var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-arrow {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--text-heading);
+      transition: transform var(--transition), color var(--transition);
+    }
+
+    .card-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-body);
+      margin-bottom: 16px;
+    }
+
+    /* ===== TAGS ===== */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* ===== VENTURES ===== */
+    .venture-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+      transition: gap var(--transition);
+    }
+
+    .venture-link:hover {
+      gap: 8px;
+    }
+
+    .venture-link svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ===== BLOG ===== */
+    .blog-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .blog-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-top: 4px;
+      min-width: 70px;
+      letter-spacing: 0.3px;
+    }
+
+    .blog-content {
+      flex: 1;
+    }
+
+    .blog-content .card-title {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .blog-content .card-desc {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .coming-soon {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      border: 1px solid rgba(90, 101, 128, 0.3);
+      padding: 2px 10px;
+      border-radius: 9999px;
+      margin-left: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-intro {
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-body);
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .contact-link:hover {
+      background: var(--bg-card);
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .contact-link svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .contact-link-label {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .contact-link-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-heading);
+      transition: color var(--transition);
+    }
+
+    .contact-link:hover .contact-link-value {
+      color: var(--accent);
+    }
+
+    .contact-link-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 48px 0 24px;
+      border-top: 1px solid rgba(136, 146, 176, 0.1);
+      margin-top: 48px;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .footer a {
+      color: var(--text-body);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* ===== SECTION FADE-IN ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        padding: 0 24px;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        max-height: none;
+        padding: 72px 0 24px 0;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .section-label {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(10, 25, 47, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 16px 0;
+        margin-bottom: 24px;
+        margin-left: -24px;
+        margin-right: -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .main {
+        padding: 48px 0 72px 0;
+      }
+
+      section {
+        margin-bottom: 80px;
+      }
+
+      .sidebar h1 {
+        font-size: 36px;
+      }
+
+      .sidebar h2 {
+        font-size: 17px;
+      }
+
+      .blog-card {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .blog-date {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sidebar h1 {
+        font-size: 30px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .contact-link {
+        padding: 14px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Spotlight background -->
+  <div class="spotlight" id="spotlight"></div>
+
+  <div class="container">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <h1>Vijay Kas</h1>
+        <h2>Engineering Leader</h2>
+        <p class="tagline">I build products, lead engineering teams, and turn side-project ideas into real things.</p>
+
+        <nav class="nav" id="nav">
+          <a href="#about" data-section="about">
+            <span class="nav-line"></span>
+            <span>About</span>
+          </a>
+          <a href="#ventures" data-section="ventures">
+            <span class="nav-line"></span>
+            <span>Ventures</span>
+          </a>
+          <a href="#projects" data-section="projects">
+            <span class="nav-line"></span>
+            <span>Projects</span>
+          </a>
+          <a href="#blog" data-section="blog">
+            <span class="nav-line"></span>
+            <span>Blog</span>
+          </a>
+          <a href="#contact" data-section="contact">
+            <span class="nav-line"></span>
+            <span>Contact</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="social-links">
+          <!-- GitHub -->
+          <a href="https://github.com/kasvijay" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/vijaykas" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:hello@vijaykas.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="22,4 12,13 2,4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN CONTENT -->
+    <main class="main" id="main-content">
+
+      <!-- ABOUT -->
+      <section id="about" class="fade-in">
+        <div class="section-label">About</div>
+        <div class="about-text">
+          <p>
+            I'm a Engineering Leader who thrives at the intersection of building and leading. By day, I guide engineering teams through the full product lifecycle — architecture decisions, sprint planning, shipping features, and everything in between. By night, I'm usually prototyping the next idea.
+          </p>
+          <p>
+            My work spans <a href="#projects">mobile apps</a>, backend systems, and web platforms. I care about clean architecture, developer experience, and products that solve real problems without unnecessary complexity.
+          </p>
+          <p>
+            Outside of my day job, I explore ideas through personal ventures like <a href="#ventures">ZunicLabs</a> and <a href="#ventures">BatchBook</a> — building things from zero to one, learning what works, and shipping what matters.
+          </p>
+        </div>
+      </section>
+
+      <!-- VENTURES -->
+      <section id="ventures" class="fade-in">
+        <div class="section-label">Ventures</div>
+
+        <a class="card" href="https://zuniclabs.com" target="_blank" rel="noopener noreferrer">
+          <div class="card-overline">Product Studio</div>
+          <div class="card-title">
+            ZunicLabs
+            <span class="card-arrow">&nearr;</span>
+          </div>
+          <div class="card-desc">
+            A small product studio where I experiment with ideas, build tools, and ship consumer-facing products. ZunicLabs is the home for my independent software projects and the umbrella brand for everything I build outside of work.
+          </div>
+          <div class="tags">
+            <span class="tag">Product Development</span>
+            <span class="tag">Web</span>
+            <span class="tag">Mobile</span>
+            <span class="tag">Design</span>
+          </div>
+        </a>
+
+        <div class="card">
+          <div class="card-overline">Mobile App</div>
+          <div class="card-title">
+            BatchBook
+            <span class="card-arrow">&nearr;</span>
+          </div>
+          <div class="card-desc">
+            A batch-cooking companion app for Android and iOS. Plan meals, scale recipes for the week, and generate shopping lists — designed for people who meal-prep. Built with a native-first approach and a clean, focused interface.
+          </div>
+          <div class="tags">
+            <span class="tag">Android</span>
+            <span class="tag">iOS</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">Swift</span>
+            <span class="tag">Firebase</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="fade-in">
+        <div class="section-label">Projects</div>
+
+        <div class="card">
+          <div class="card-overline">Engineering</div>
+          <div class="card-title">Mobile App Platform</div>
+          <div class="card-desc">
+            Designed and built cross-platform mobile applications from the ground up, focusing on native performance and maintainable architecture. Led decisions around state management, offline support, and modular feature delivery.
+          </div>
+          <div class="tags">
+            <span class="tag">Android</span>
+            <span class="tag">iOS</span>
+            <span class="tag">Architecture</span>
+            <span class="tag">Jetpack Compose</span>
+            <span class="tag">SwiftUI</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-overline">Systems</div>
+          <div class="card-title">Backend & API Design</div>
+          <div class="card-desc">
+            Built RESTful and event-driven backend services powering mobile and web clients. Worked across API gateway patterns, authentication flows, data pipelines, and cloud infrastructure with a focus on reliability and developer experience.
+          </div>
+          <div class="tags">
+            <span class="tag">APIs</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">Cloud</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-overline">Leadership</div>
+          <div class="card-title">Team & Process</div>
+          <div class="card-desc">
+            Led cross-functional engineering teams through planning, execution, and delivery. Established CI/CD pipelines, defined engineering standards, ran sprint ceremonies, and created environments where developers do their best work.
+          </div>
+          <div class="tags">
+            <span class="tag">Leadership</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">Agile</span>
+            <span class="tag">Mentoring</span>
+            <span class="tag">Code Review</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section id="blog" class="fade-in">
+        <div class="section-label">Blog</div>
+
+        <div class="card">
+          <div class="blog-card">
+            <div class="blog-date">2026</div>
+            <div class="blog-content">
+              <div class="card-title">
+                Why I Build Things Outside of Work
+                <span class="coming-soon">soon</span>
+              </div>
+              <div class="card-desc">
+                On the value of side projects, learning in public, and why shipping your own product changes how you lead at work.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="blog-card">
+            <div class="blog-date">2026</div>
+            <div class="blog-content">
+              <div class="card-title">
+                Lessons From Going Native on Mobile
+                <span class="coming-soon">soon</span>
+              </div>
+              <div class="card-desc">
+                A look at the trade-offs of choosing native Android and iOS over cross-platform frameworks — and when each approach makes sense.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="blog-card">
+            <div class="blog-date">2026</div>
+            <div class="blog-content">
+              <div class="card-title">
+                The Manager Who Still Codes
+                <span class="coming-soon">soon</span>
+              </div>
+              <div class="card-desc">
+                Navigating the tension between staying technical and growing as a people leader. Where I draw the line and why.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="fade-in">
+        <div class="section-label">Contact</div>
+
+        <p class="contact-intro">
+          I'm always open to interesting conversations — whether it's about product ideas, engineering leadership, or potential collaborations. Feel free to reach out.
+        </p>
+
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:hello@vijaykas.com">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="22,4 12,13 2,4"/>
+            </svg>
+            <div class="contact-link-text">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">hello@vijaykas.com</span>
+            </div>
+          </a>
+
+          <a class="contact-link" href="https://linkedin.com/in/vijaykas" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            <div class="contact-link-text">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-value">linkedin.com/in/vijaykas</span>
+            </div>
+          </a>
+
+          <a class="contact-link" href="https://github.com/kasvijay" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+            </svg>
+            <div class="contact-link-text">
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">github.com/kasvijay</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <p>
+          Loosely inspired by <a href="https://brittanychiang.com" target="_blank" rel="noopener noreferrer">Brittany Chiang</a>.
+          Built with plain HTML, CSS, and a bit of vanilla JS.
+        </p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // ===== CURSOR SPOTLIGHT =====
+    (function() {
+      const spotlight = document.getElementById('spotlight');
+      let mouseX = -1000;
+      let mouseY = -1000;
+      let rafId = null;
+
+      function updateSpotlight() {
+        spotlight.style.background = `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(29, 78, 116, 0.15), transparent 80%)`;
+        rafId = null;
+      }
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!rafId) {
+          rafId = requestAnimationFrame(updateSpotlight);
+        }
+      });
+
+      // Hide on mobile / touch
+      document.addEventListener('touchstart', function() {
+        spotlight.style.opacity = '0';
+      }, { once: true });
+    })();
+
+    // ===== INTERSECTION OBSERVER — NAV HIGHLIGHTING =====
+    (function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('#nav a[data-section]');
+      let currentActive = null;
+
+      const observer = new IntersectionObserver(
+        function(entries) {
+          // Gather all currently intersecting sections
+          const visible = [];
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              visible.push(entry);
+            }
+          });
+
+          // Find the one closest to the top of the viewport
+          let best = null;
+          let bestTop = Infinity;
+
+          sections.forEach(function(section) {
+            const rect = section.getBoundingClientRect();
+            // Consider a section "active" if any part of it is visible and its top is closest to viewport top
+            if (rect.top < window.innerHeight * 0.5 && rect.bottom > 0) {
+              if (Math.abs(rect.top) < Math.abs(bestTop) || rect.top >= 0 && rect.top < bestTop) {
+                bestTop = rect.top;
+                best = section.id;
+              }
+            }
+          });
+
+          if (best && best !== currentActive) {
+            currentActive = best;
+            navLinks.forEach(function(link) {
+              if (link.getAttribute('data-section') === best) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        },
+        {
+          rootMargin: '-10% 0px -40% 0px',
+          threshold: [0, 0.1, 0.2, 0.5]
+        }
+      );
+
+      sections.forEach(function(section) {
+        observer.observe(section);
+      });
+
+      // Also update on scroll for edge cases
+      let scrollRaf = null;
+      window.addEventListener('scroll', function() {
+        if (!scrollRaf) {
+          scrollRaf = requestAnimationFrame(function() {
+            let best = null;
+            let bestDist = Infinity;
+
+            sections.forEach(function(section) {
+              const rect = section.getBoundingClientRect();
+              const dist = Math.abs(rect.top - window.innerHeight * 0.2);
+              if (rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.1 && dist < bestDist) {
+                bestDist = dist;
+                best = section.id;
+              }
+            });
+
+            if (best && best !== currentActive) {
+              currentActive = best;
+              navLinks.forEach(function(link) {
+                if (link.getAttribute('data-section') === best) {
+                  link.classList.add('active');
+                } else {
+                  link.classList.remove('active');
+                }
+              });
+            }
+
+            scrollRaf = null;
+          });
+        }
+      }, { passive: true });
+    })();
+
+    // ===== FADE-IN ON SCROLL =====
+    (function() {
+      const fadeEls = document.querySelectorAll('.fade-in');
+
+      const fadeObserver = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              fadeObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.08,
+          rootMargin: '0px 0px -60px 0px'
+        }
+      );
+
+      fadeEls.forEach(function(el) {
+        fadeObserver.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>
